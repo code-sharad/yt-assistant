@@ -3,26 +3,23 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.llms import OpenAI
-from langchain.prompts import PromptTemplate
+from langchain import PromptTemplate
 from langchain.chains import LLMChain
 from dotenv import load_dotenv
 
-import os
-
 
 load_dotenv()
+embeddings = OpenAIEmbeddings()
 
 
-
-
-def create_db_from_youtube_video_url(video_url: str,api_key:str) -> FAISS:
+def create_db_from_youtube_video_url(video_url: str) -> FAISS:
     loader = YoutubeLoader.from_youtube_url(video_url)
     transcript = loader.load()
 
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
     docs = text_splitter.split_documents(transcript)
 
-    db = FAISS.from_documents(docs, OpenAIEmbeddings(openai_api_key=api_key))
+    db = FAISS.from_documents(docs, embeddings)
     return db
 
 
