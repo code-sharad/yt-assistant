@@ -2,6 +2,7 @@ import streamlit as st
 import langchain_helper as lch
 import textwrap
 import sys
+import os
 
 
 st.set_page_config(page_icon="🌈",page_title="Youtube Assistant",layout="centered")
