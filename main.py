@@ -14,7 +14,11 @@ with st.form(key='my_form'):
     submitted = st.form_submit_button(label='Submit')
 
 if query and video_url:
-    db = lch.create_db_from_youtube_video_url(video_url=video_url)
+    try:
+        db = lch.create_db_from_youtube_video_url(video_url=video_url)
+    except ValueError:
+        st.error("Invalid Youtube URL")
+       
     response, docs = lch.get_response_from_query(db=db,query=query)
     st.header("Answer:")
 

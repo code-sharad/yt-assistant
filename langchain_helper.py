@@ -11,9 +11,13 @@ import os
 
 load_dotenv()
 embeddings = OpenAIEmbeddings(openai_api_key=os.getenv("OPENAI_API_KEY"))
-
+OpenAI.openai_api_key = os.getenv("OPENAI_API_KEY")
 def create_db_from_youtube_video_url(video_url: str) -> FAISS:
-    loader = YoutubeLoader.from_youtube_url(video_url)
+    try:
+        loader = YoutubeLoader.from_youtube_url(video_url)
+    except ValueError:
+        raise ValueError("Invalid Youtube URL")
+        
     transcript = loader.load()
 
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
