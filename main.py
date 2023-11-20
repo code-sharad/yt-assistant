@@ -20,11 +20,12 @@ if query and video_url:
         st.error("Invalid Youtube URL")
     try:
         response, docs = lch.get_response_from_query(db=db,query=query)
+        st.header("Answer:")
+
+        st.text(textwrap.fill(response,width=45))
     except NameError:
         st.error("Invalid Query")
-    st.header("Answer:")
-
-    st.text(textwrap.fill(response,width=45))
+    
 
 
 
