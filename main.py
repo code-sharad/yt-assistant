@@ -5,7 +5,7 @@ import sys
 
 
 st.set_page_config(page_icon="🌈",page_title="Youtube Assistant",layout="centered")
-
+os.environ["OPENAI_API_KEY"] == st.secrets["OPENAI_API_KEY"],
 st.header("Youtube Assistant 🔥")
 with st.form(key='my_form'):
     video_url = st.text_input(label='Enter a Youtube video URL',max_chars=50)
