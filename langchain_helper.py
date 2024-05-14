@@ -36,7 +36,7 @@ def get_response_from_query(db, query, k=4):
     docs = db.similarity_search(query, k=k)
     docs_page_content = " ".join([d.page_content for d in docs])
 
-    llm = OpenAI(model_name="text-davinci-003")
+    llm = OpenAI(model_name="davinci-002")
 
     prompt = PromptTemplate(
         input_variables=["question", "docs"],
